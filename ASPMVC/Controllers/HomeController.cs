@@ -26,5 +26,31 @@ namespace ASPMVC.Controllers
 
 			return View();
 		}
+
+		public string Details(string id, string name)
+		{
+			return "Id " + id + " Name " + name;
+		}
+
+		public ActionResult CountryList()
+		{
+			ViewBag.Countries = new List<string>()
+			{
+				"India",
+				"US",
+				"UK",
+				"Canada"
+			};
+
+			ViewData["Countries"] = new List<string>()
+			{
+				"India",
+				"US",
+				"UK",
+				"Canada"
+			};
+
+			return View();
+		}
 	}
 }
