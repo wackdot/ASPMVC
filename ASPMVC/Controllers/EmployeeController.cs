@@ -1,4 +1,4 @@
-﻿using ASPMVC.Models;
+﻿using ASPMVC.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,22 +7,35 @@ using System.Web.Mvc;
 
 namespace ASPMVC.Controllers
 {
-    public class EmployeeController : Controller
-    {
-		public ActionResult Index(int departmentId)
+	public class EmployeeController : Controller
+	{
+		public ActionResult Index()
 		{
-			DataManipulation data = new DataManipulation();
-			List<Employee> employeeList = data.Employees.Where(emp => emp.DepartmentId == departmentId).ToList();
+			EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+			List<Employee> employees = employeeBusinessLayer.Employees.ToList();
 
-			return View(employeeList);
+			return View(employees);
 		}
 
-		public ActionResult Details(int id)
+		[HttpGet]
+		public ActionResult Create()
 		{
-			DataManipulation data = new DataManipulation();
-			Employee employee = data.Employees.Single(emp => emp.EmployeeId == id);
+			return View();
+		}
 
-			return View(employee);
+		[HttpPost]
+		public ActionResult Create(FormCollection fc)
+		{
+			Employee employee = new Employee();
+			employee.Name = fc["Name"];
+			employee.Gender = fc["Gender"];
+			employee.City = fc["City"];
+			employee.DepartmentId = Convert.ToInt32(fc["DepartmentId"]);
+
+			EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+			employeeBusinessLayer.AddEmployee(employee);
+
+			return RedirectToAction("Index");
 		}
 	}
 }
