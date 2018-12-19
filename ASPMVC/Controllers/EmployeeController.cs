@@ -37,5 +37,20 @@ namespace ASPMVC.Controllers
 
 			return RedirectToAction("Index");
 		}
+
+		//[HttpPost]
+		//public ActionResult Create(string name, string gender, string city, int departmentId)
+		//{
+		//	Employee employee = new Employee();
+		//	employee.Name = name;
+		//	employee.Gender = gender;
+		//	employee.City = city;
+		//	employee.DepartmentId = departmentId;
+
+		//	EmployeeBusinessLayer employeeBusinessLayer = new EmployeeBusinessLayer();
+		//	employeeBusinessLayer.AddEmployee(employee);
+
+		//	return RedirectToAction("Index");
+		//}
 	}
 }
